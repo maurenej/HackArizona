@@ -10,7 +10,8 @@ import time
 import dlib
 import cv2
 import sys
-
+import Tkinter
+import tkMessageBox
 
 def eye_aspect_ratio(eye):
 	# compute the euclidean distances between the two sets of
@@ -27,12 +28,17 @@ def eye_aspect_ratio(eye):
 
 	# return the eye aspect ratio
 	return ear
-
+def take_break():
+    tkMessageBox.showinfo("Please take a break from your screen!")
 def check_blink_thresh(inc, tot, elapsed):
 	global start_time
 	bpm = tot/ elapsed
 	if bpm < BPM_THRESH and ((inc/tot) > 0.5):
-		print("WOOOOOO")
+		# print("WOOOOOO")
+		top = Tkinter.Tk()
+		B1 = Tkinter.Button(top, text = "Okay", command = take_break)
+		B1.pack()
+		top.mainloop()
 	else:
 		start_time = time.time()
 
