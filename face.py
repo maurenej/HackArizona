@@ -45,7 +45,7 @@ args = vars(ap.parse_args())
 # frames the eye must be below the threshold
 
 # also includes threshold for an INCOMPLETE blink
-EYE_AR_THRESH = 0.3
+EYE_AR_THRESH = 0.2
 EYE_AR_INC_THRESH = 0.1
 EYE_AR_CONSEC_FRAMES = 3
  
@@ -152,6 +152,7 @@ while True:
 
 		# The elapsed time is the current time minus the start time (divided by 60 for minutes)
 		elapsed_time = float((time.time() - start_time) / 60.0)	
+		print(str(elapsed_time))
 
 		if elapsed_time > 1:
 			cv2.putText(frame, "REACHED TIME", (10, 30),
