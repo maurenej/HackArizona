@@ -29,8 +29,8 @@ def eye_aspect_ratio(eye):
 
 def check_blink_thresh(inc, tot, elapsed):
 	global start_time
-	bpm = (com + inc) / elapsed
-	if bpm < BPM_THRESH and ((inc/total) > 5):
+	bpm = tot/ elapsed
+	if bpm < BPM_THRESH and ((inc/tot) > 0.5):
 		print("WOOOOOO")
 		exit()
 	else:
