@@ -37,18 +37,24 @@ ap.add_argument("-p", "--shape-predictor", required=True,
 ap.add_argument("-v", "--video", type=str, 
 	help="path to input video file")
 args = vars(ap.parse_args())
-ap.add_argument("-max_time", "--min_time", required = FALSE, help = "set your minimum and maximum time periods, will default to 20 minutes and 1 hour otherwise")
+
 
 
 # define two constants, one for the eye aspect ratio to indicate
 # blink and then a second constant for the number of consecutive
 # frames the eye must be below the threshold
+
+# also includes threshold for an INCOMPLETE blink
 EYE_AR_THRESH = 0.3
+EYE_AR_INC_THRESH = 0.1
 EYE_AR_CONSEC_FRAMES = 3
  
 # initialize the frame counters and the total number of blinks
 COUNTER = 0
+INC_COUNTER = 0
 TOTAL = 0
+INC_TOTAL = 0
+
 
 
 # initialize dlib's face detector (HOG-based) and then create
@@ -120,6 +126,9 @@ while True:
 		# threshold, and if so, increment the blink frame counter
 		if ear < EYE_AR_THRESH:
 			COUNTER += 1
+			
+		if ear > EYE_AR_INC_THRESH:
+			INC_COUNTER += 1
  
 		# otherwise, the eye aspect ratio is not below the blink
 		# threshold
@@ -128,9 +137,13 @@ while True:
 			# then increment the total number of blinks
 			if COUNTER >= EYE_AR_CONSEC_FRAMES:
 				TOTAL += 1
+				
+			if INC_COUNTER >= EYE_AR_CONSE_FRAMES:
+				INC_TOTAL += 1
  
 			# reset the eye frame counter
 			COUNTER = 0
+			INC_COUNTER = 0
 
 		# draw the total number of blinks on the frame along with
 		# the computed eye aspect ratio for the frame
