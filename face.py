@@ -84,6 +84,7 @@ CALIBRATING = True
 # loop over frames from the video stream
 
 def calibrate(hot_cheeto):
+	global AVG_EAR
 	if hot_cheeto == True:
 		for i in range(50):
 			# if this is a file video stream, then we need to check if
