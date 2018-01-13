@@ -11,8 +11,6 @@ import dlib
 import cv2
 
 
-
-
 def eye_aspect_ratio(eye):
 	# compute the euclidean distances between the two sets of
 	# vertical eye landmarks (x, y)-coordinates
@@ -29,6 +27,16 @@ def eye_aspect_ratio(eye):
 	# return the eye aspect ratio
 	return ear
 
+def check_blink_thresh(inc, tot, elapsed):
+	global start_time
+	bpm = (com + inc) / elapsed
+	if bpm < BPM_THRESH and ((inc/total) > 5):
+		print("WOOOOOO")
+		exit()
+	else:
+		start_time = time.time()
+
+
  
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -39,15 +47,17 @@ ap.add_argument("-v", "--video", type=str,
 args = vars(ap.parse_args())
 
 AVG_EAR = 0
+start_time = 0
 
 # define two constants, one for the eye aspect ratio to indicate
 # blink and then a second constant for the number of consecutive
 # frames the eye must be below the threshold
 
 # also includes threshold for an INCOMPLETE blink
-EYE_AR_THRESH = 0.25
+EYE_AR_THRESH = 0.24
 EYE_AR_INC_THRESH = 0.1
 EYE_AR_CONSEC_FRAMES = 3
+BPM_THRESH = 10
  
 # initialize the frame counters and the total number of blinks
 COUNTER = 0
@@ -202,10 +212,11 @@ while True:
 		# The elapsed time is the current time minus the start time (divided by 60 for minutes)
 		elapsed_time = float((time.time() - start_time) / 60.0)	
 
-		if elapsed_time > 1:
+		if elapsed_time > 0.5:
 			cv2.putText(frame, "REACHED TIME", (10, 30),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 			#sleep(5)
+			check_blink_thresh(INC_TOTAL, TOTAL, elapsed_time)
 			#start_time = time.time()
 
 
