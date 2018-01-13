@@ -37,6 +37,7 @@ ap.add_argument("-p", "--shape-predictor", required=True,
 ap.add_argument("-v", "--video", type=str, 
 	help="path to input video file")
 args = vars(ap.parse_args())
+ap.add_argument("max_time", "min_time", required = FALSE, help = "set your minimum and maximum time periods, will default to 20 minutes and 1 hour otherwise")
 
 
 # define two constants, one for the eye aspect ratio to indicate
