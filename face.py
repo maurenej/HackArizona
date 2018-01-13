@@ -119,7 +119,7 @@ def calib(hot_cheeto):
 
 				# average the eye aspect ratio together for both eyes
 				ear = (leftEAR + rightEAR) / 2.0
-				AVG_EAR = (AVG_EAR + ear) / i + 1
+				AVG_EAR = (AVG_EAR + ear) / (i + 1)
 
 				# compute the convex hull for the left and right eye, then
 				# visualize each of the eyes
