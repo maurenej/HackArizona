@@ -57,7 +57,7 @@ start_time = 0
 EYE_AR_THRESH = 0.24
 EYE_AR_INC_THRESH = 0.1
 EYE_AR_CONSEC_FRAMES = 3
-BPM_THRESH = 10
+BPM_THRESH = 100
  
 # initialize the frame counters and the total number of blinks
 COUNTER = 0
