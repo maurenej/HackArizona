@@ -156,7 +156,7 @@ while True:
 		if elapsed_time > 1:
 			cv2.putText(frame, "REACHED TIME", (10, 30),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-			sleep(5)
+			#sleep(5)
 			#start_time = time.time()
 
 
