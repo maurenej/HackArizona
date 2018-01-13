@@ -127,8 +127,6 @@ while True:
 		if ear < EYE_AR_THRESH:
 			COUNTER += 1
 			
-		if ear > EYE_AR_INC_THRESH:
-			INC_COUNTER += 1
  
 		# otherwise, the eye aspect ratio is not below the blink
 		# threshold
@@ -138,13 +136,19 @@ while True:
 			if COUNTER >= EYE_AR_CONSEC_FRAMES:
 				TOTAL += 1
 				
-			if INC_COUNTER >= EYE_AR_CONSE_FRAMES:
-				INC_TOTAL += 1
  
 			# reset the eye frame counter
 			COUNTER = 0
+		
+		# do the same process to record incomplete blinks
+		if ear > EYE_AR_INC_THRESH:
+			INC_COUNTER += 1
+			
+		else:
+			if INC_COUNTER >= EYE_AR_CONSE_FRAMES:
+				INC_TOTAL += 1
+				
 			INC_COUNTER = 0
-
 		# draw the total number of blinks on the frame along with
 		# the computed eye aspect ratio for the frame
 		cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30),
