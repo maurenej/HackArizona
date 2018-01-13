@@ -33,7 +33,7 @@ def check_blink_thresh(inc, tot, elapsed):
 	bpm = tot/ elapsed
 	if bpm < BPM_THRESH and ((inc/tot) > 0.5):
 		print("WOOOOOO")
-		sys.exit(0)
+		sleep(1000000000000)
 	else:
 		start_time = time.time()
 
@@ -55,7 +55,7 @@ start_time = 0
 # frames the eye must be below the threshold
 
 # also includes threshold for an INCOMPLETE blink
-EYE_AR_THRESH = 0.24
+EYE_AR_THRESH = 0.23
 EYE_AR_INC_THRESH = 0.1
 EYE_AR_CONSEC_FRAMES = 3
 BPM_THRESH = 1
