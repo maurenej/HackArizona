@@ -79,7 +79,7 @@ fileStream = False
 time.sleep(1.0)
 
 
-
+start_time = time.time()
 # loop over frames from the video stream
 while True:
 	# if this is a file video stream, then we need to check if
@@ -149,6 +149,16 @@ while True:
 				INC_TOTAL += 1
 				
 			INC_COUNTER = 0
+
+		# The elapsed time is the current time minus the start time (divided by 60 for minutes)
+		elapsed_time = float((time.time() - start_time) / 60.0)	
+
+		if elapsed_time > 1:
+			cv2.putText(frame, "REACHED TIME", (10, 30),
+			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+			start_time = time.time()
+
+
 		# draw the total number of blinks on the frame along with
 		# the computed eye aspect ratio for the frame
 		cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30),
