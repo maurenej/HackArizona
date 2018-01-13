@@ -83,7 +83,7 @@ start_time = time.time()
 CALIBRATING = True
 # loop over frames from the video stream
 
-def calibrate(hot_cheeto):
+def calib(hot_cheeto):
 	global AVG_EAR
 	if hot_cheeto == True:
 		for i in range(50):
@@ -129,7 +129,7 @@ def calibrate(hot_cheeto):
 				cv2.drawContours(frame, [rightEyeHull], -1, (0, 255, 0), 1)
 	CALIBRATING = False
 while True:
-	calibrate(CALIBRATING)
+	calib(CALIBRATING)
 	EYE_AR_THRESH = AVG_EAR * 0.75
 	# if this is a file video stream, then we need to check if
 	# there any more frames left in the buffer to process
