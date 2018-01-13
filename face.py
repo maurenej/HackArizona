@@ -200,7 +200,7 @@ while True:
 			COUNTER = 0
 		
 		# do the same process to record incomplete blinks
-		if ear > EYE_AR_INC_THRESH:
+		if ear > EYE_AR_INC_THRESH and ear < EYE_AR_THRESH:
 			INC_COUNTER += 1
 			
 		else:
