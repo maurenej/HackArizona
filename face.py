@@ -9,6 +9,7 @@ import imutils
 import time
 import dlib
 import cv2
+import sys
 
 
 def eye_aspect_ratio(eye):
@@ -32,7 +33,7 @@ def check_blink_thresh(inc, tot, elapsed):
 	bpm = tot/ elapsed
 	if bpm < BPM_THRESH and ((inc/tot) > 0.5):
 		print("WOOOOOO")
-		exit()
+		sys.exit(0)
 	else:
 		start_time = time.time()
 
