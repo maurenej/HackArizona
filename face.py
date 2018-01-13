@@ -33,7 +33,7 @@ def check_blink_thresh(inc, tot, elapsed):
 	bpm = tot/ elapsed
 	if bpm < BPM_THRESH and ((inc/tot) > 0.5):
 		print("WOOOOOO")
-		sleep(1000000000000)
+		time.sleep(1000000000000)
 	else:
 		start_time = time.time()
 
