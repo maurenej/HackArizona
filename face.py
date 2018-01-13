@@ -80,7 +80,7 @@ time.sleep(1.0)
 
 
 start_time = time.time()
-CALIBRATING = TRUE
+CALIBRATING = True
 # loop over frames from the video stream
 
 def calibrate(hot_cheeto):
