@@ -145,7 +145,7 @@ while True:
 			INC_COUNTER += 1
 			
 		else:
-			if INC_COUNTER >= EYE_AR_CONSE_FRAMES:
+			if INC_COUNTER >= EYE_AR_CONSEC_FRAMES:
 				INC_TOTAL += 1
 				
 			INC_COUNTER = 0
