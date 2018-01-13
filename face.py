@@ -45,7 +45,7 @@ args = vars(ap.parse_args())
 # frames the eye must be below the threshold
 
 # also includes threshold for an INCOMPLETE blink
-EYE_AR_THRESH = 0.28
+EYE_AR_THRESH = 0.25
 EYE_AR_INC_THRESH = 0.1
 EYE_AR_CONSEC_FRAMES = 3
  
@@ -157,7 +157,7 @@ while True:
 			cv2.putText(frame, "REACHED TIME", (10, 30),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 			sleep(5)
-			start_time = time.time()
+			#start_time = time.time()
 
 
 		# draw the total number of blinks on the frame along with
