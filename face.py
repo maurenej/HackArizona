@@ -33,7 +33,6 @@ def check_blink_thresh(inc, tot, elapsed):
 	bpm = tot/ elapsed
 	if bpm < BPM_THRESH and ((inc/tot) > 0.5):
 		print("WOOOOOO")
-		time.sleep(1000000000000)
 	else:
 		start_time = time.time()
 
@@ -214,8 +213,7 @@ while True:
 		elapsed_time = float((time.time() - start_time) / 60.0)	
 
 		if elapsed_time > 0.5:
-			cv2.putText(frame, "REACHED TIME", (10, 30),
-			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+			print("REACHED TIME")
 			#sleep(5)
 			check_blink_thresh(INC_TOTAL, TOTAL, elapsed_time)
 			#start_time = time.time()
