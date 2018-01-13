@@ -212,7 +212,7 @@ while True:
 		# The elapsed time is the current time minus the start time (divided by 60 for minutes)
 		elapsed_time = float((time.time() - start_time) / 60.0)	
 
-		if elapsed_time > 0.5:
+		if elapsed_time > 0.25:
 			print("REACHED TIME")
 			#sleep(5)
 			check_blink_thresh(INC_TOTAL, TOTAL, elapsed_time)
@@ -221,7 +221,7 @@ while True:
 
 		# draw the total number of blinks on the frame along with
 		# the computed eye aspect ratio for the frame
-		cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30),
+		cv2.putText(frame, "Blinks: {}".format(INC_TOTAL), (10, 30),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 		cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
