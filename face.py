@@ -38,7 +38,7 @@ ap.add_argument("-v", "--video", type=str,
 	help="path to input video file")
 args = vars(ap.parse_args())
 
-
+AVG_EAR = 0
 
 # define two constants, one for the eye aspect ratio to indicate
 # blink and then a second constant for the number of consecutive
@@ -80,8 +80,10 @@ time.sleep(1.0)
 
 
 start_time = time.time()
+CALIBRATING = TRUE
 # loop over frames from the video stream
-while True:
+while True && !CALIBRATING:
+	EYE_AR_THRESH = AVG_EAR * 0.75
 	# if this is a file video stream, then we need to check if
 	# there any more frames left in the buffer to process
 	if fileStream and not vs.more():
@@ -174,7 +176,50 @@ while True:
 	# if the `q` key was pressed, break from the loop
 	if key == ord("q"):
 		break
- 
+
+else:
+	for i in range(50):
+			# if this is a file video stream, then we need to check if
+	# there any more frames left in the buffer to process
+	if fileStream and not vs.more():
+		break
+
+	# grab the frame from the threaded video file stream, resize
+	# it, and convert it to grayscale
+	# channels)
+	frame = vs.read()
+	frame = imutils.resize(frame, width=450)
+	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+	# detect faces in the grayscale frame
+	rects = detector(gray, 0)
+
+	# loop over the face detections
+	for rect in rects:
+		# determine the facial landmarks for the face region, then
+		# convert the facial landmark (x, y)-coordinates to a NumPy
+		# array
+		shape = predictor(gray, rect)
+		shape = face_utils.shape_to_np(shape)
+
+		# extract the left and right eye coordinates, then use the
+		# coordinates to compute the eye aspect ratio for both eyes
+		leftEye = shape[lStart:lEnd]
+		rightEye = shape[rStart:rEnd]
+		leftEAR = eye_aspect_ratio(leftEye)
+		rightEAR = eye_aspect_ratio(rightEye)
+
+		# average the eye aspect ratio together for both eyes
+		ear = (leftEAR + rightEAR) / 2.0
+		AVG_EAR = (AVG_EAR + ear) / i + 1
+
+		# compute the convex hull for the left and right eye, then
+		# visualize each of the eyes
+		leftEyeHull = cv2.convexHull(leftEye)
+		rightEyeHull = cv2.convexHull(rightEye)
+		cv2.drawContours(frame, [leftEyeHull], -1, (0, 255, 0), 1)
+		cv2.drawContours(frame, [rightEyeHull], -1, (0, 255, 0), 1)
+
 # do a bit of cleanup
 cv2.destroyAllWindows()
 vs.stop()
