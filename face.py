@@ -84,7 +84,7 @@ CALIBRATING = TRUE
 # loop over frames from the video stream
 
 def calibrate(hot_cheeto):
-	if hot_cheeto == TRUE:
+	if hot_cheeto == True:
 		for i in range(50):
 			# if this is a file video stream, then we need to check if
 			# there any more frames left in the buffer to process
@@ -126,7 +126,7 @@ def calibrate(hot_cheeto):
 				rightEyeHull = cv2.convexHull(rightEye)
 				cv2.drawContours(frame, [leftEyeHull], -1, (0, 255, 0), 1)
 				cv2.drawContours(frame, [rightEyeHull], -1, (0, 255, 0), 1)
-	CALIBRATING = FALSE
+	CALIBRATING = False
 while True:
 	calibrate(CALIBRATING)
 	EYE_AR_THRESH = AVG_EAR * 0.75
