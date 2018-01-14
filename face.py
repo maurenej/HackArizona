@@ -13,6 +13,7 @@ import sys
 import Tkinter
 import tkMessageBox
 import pymsgbox
+import os
 
 def eye_aspect_ratio(eye):
 	# compute the euclidean distances between the two sets of
@@ -40,7 +41,8 @@ def check_blink_thresh(inc, tot, elapsed):
 	bpm = tot/ elapsed
 	if bpm < BPM_THRESH and ((inc/tot) > 0.5):
 		# print("WOOOOOO")
-		pymsgbox.alert(text = "Please look away from screen", button = "Okay")
+		#pymsgbox.alert(text = "Please look away from screen", button = "Okay")
+		os.system("osascript -e 'tell application \"Finder\" to sleep'")
 	else:
 		start_time = time.time()
 
