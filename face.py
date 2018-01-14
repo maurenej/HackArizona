@@ -42,7 +42,7 @@ def check_blink_thresh(inc, tot, elapsed):
 	if bpm < BPM_THRESH and ((inc/tot) > 0.5):
 		# print("WOOOOOO")
 		#pymsgbox.alert(text = "Please look away from screen", button = "Okay")
-		os.system("do shell script "pmset displaysleepnow"")
+		os.system("pmset displaysleepnow")
 	else:
 		start_time = time.time()
 
