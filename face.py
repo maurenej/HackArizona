@@ -28,14 +28,17 @@ def eye_aspect_ratio(eye):
 
 	# return the eye aspect ratio
 	return ear
+
+top = Tkinter.Tk()
+
 def take_break():
     tkMessageBox.showinfo("Please take a break from your screen!")
 def check_blink_thresh(inc, tot, elapsed):
 	global start_time
+	global top
 	bpm = tot/ elapsed
 	if bpm < BPM_THRESH and ((inc/tot) > 0.5):
 		# print("WOOOOOO")
-		top = Tkinter.Tk()
 		B1 = Tkinter.Button(top, text = "Okay", command = take_break)
 		B1.pack()
 		top.mainloop()
