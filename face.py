@@ -117,6 +117,8 @@ time.sleep(1.0)
 
 #start_time = time.time()
 CALIBRATING = True
+calibrate_count = 1
+print("Calibrating...")
 # loop over frames from the video stream
 
 # def calib(hot_cheeto):
@@ -210,53 +212,59 @@ while True:
 		cv2.drawContours(frame, [rightEyeHull], -1, (0, 255, 0), 1)
 		#cv2.drawContours(frame,[jawHull], -1, (0, 255, 0), 1)
 
-
-		if (TO_TIME):
-			start_time = time.time()
-			TO_TIME = 0
-		# check to see if the eye aspect ratio is below the blink
-		# threshold, and if so, increment the blink frame counter
-		if ear < EYE_AR_THRESH:
-			COUNTER += 1
-			
- 
-		# otherwise, the eye aspect ratio is not below the blink
-		# threshold
-		else:
-			# if the eyes were closed for a sufficient number of
-			# then increment the total number of blinks
-			if COUNTER >= EYE_AR_CONSEC_FRAMES:
-				TOTAL += 1
-				
- 
-			# reset the eye frame counter
-			COUNTER = 0
+		if CALIBRATING:
+			AVG_EAR = (AVG_EAR + ear) / calibrate_count
+			if calibrate_count = 50:
+				CALIBRATING = FALSE
+				EYE_AR_THRESH = 0.75 * AVG_EAR
 		
-		# do the same process to record incomplete blinks
-		if ear > EYE_AR_INC_THRESH and ear < EYE_AR_THRESH:
-			INC_COUNTER += 1
-			
 		else:
-			if INC_COUNTER >= EYE_AR_CONSEC_FRAMES:
-				INC_TOTAL += 1
+			if (TO_TIME):
+				start_time = time.time()
+				TO_TIME = 0
+			# check to see if the eye aspect ratio is below the blink
+			# threshold, and if so, increment the blink frame counter
+			if ear < EYE_AR_THRESH:
+				COUNTER += 1
+			
+ 
+			# otherwise, the eye aspect ratio is not below the blink
+			# threshold
+			else:
+				# if the eyes were closed for a sufficient number of
+				# then increment the total number of blinks
+				if COUNTER >= EYE_AR_CONSEC_FRAMES:
+					TOTAL += 1
 				
-			INC_COUNTER = 0
+ 
+				# reset the eye frame counter
+				COUNTER = 0
+		
+			# do the same process to record incomplete blinks
+			if ear > EYE_AR_INC_THRESH and ear < EYE_AR_THRESH:
+				INC_COUNTER += 1
+			
+			else:
+				if INC_COUNTER >= EYE_AR_CONSEC_FRAMES:
+					INC_TOTAL += 1
+				
+				INC_COUNTER = 0
 
-		# The elapsed time is the current time minus the start time (divided by 60 for minutes)
-		elapsed_time = float((time.time() - start_time) / 60.0)	
+			# The elapsed time is the current time minus the start time (divided by 60 for minutes)
+			elapsed_time = float((time.time() - start_time) / 60.0)	
 
-		if elapsed_time > MIN_TIME:
-			#sleep(5)
-			check_blink_thresh(INC_TOTAL, TOTAL, elapsed_time)
-			#start_time = time.time()
+			if elapsed_time > MIN_TIME:
+				#sleep(5)
+				check_blink_thresh(INC_TOTAL, TOTAL, elapsed_time)
+				#start_time = time.time()
 
 
-		# draw the total number of blinks on the frame along with
-		# the computed eye aspect ratio for the frame
-		cv2.putText(frame, "Blinks: {}".format(INC_TOTAL), (10, 30),
-			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-		cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
-			cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+			# draw the total number of blinks on the frame along with
+			# the computed eye aspect ratio for the frame
+			cv2.putText(frame, "Blinks: {}".format(INC_TOTAL), (10, 30),
+				cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+			cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
+				cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
  
 	# show the frame
 	cv2.imshow("Frame", frame)
