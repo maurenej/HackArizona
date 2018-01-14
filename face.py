@@ -42,7 +42,7 @@ def check_blink_thresh(inc, tot, elapsed):
 	if bpm < BPM_THRESH and ((inc/tot) > 0.5):
 		# print("WOOOOOO")
 		#pymsgbox.alert(text = "Please look away from screen", button = "Okay")
-		os.system("osascript -e 'tell application \"Finder\" to sleep'")
+		os.system("do shell script "pmset displaysleepnow"")
 	else:
 		start_time = time.time()
 
