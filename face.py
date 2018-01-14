@@ -25,6 +25,7 @@ def eye_aspect_ratio(eye):
 	# eye landmark (x, y)-coordinates
 	C = dist.euclidean(eye[0], eye[3])
 	print(eye[0])
+	print(eye[3])
 
 	# compute the eye aspect ratio
 	ear = (A + B) / (2.0 * C)
