@@ -43,18 +43,19 @@ def check_blink_thresh(inc, tot, elapsed):
 	global INC_TOTAL
 	global TOTAL
 	global NUM_ITERATIONS
+	global TO_TIME
 	print("ITERATION")
 	bpm = tot/ elapsed
 	if tot == 0 or (bpm < BPM_THRESH and ((inc/tot) > 0.5)) or NUM_ITERATIONS == 3:
 		# print("WOOOOOO")
 		#pymsgbox.alert(text = "Please look away from screen", button = "Okay")
 		os.system("pmset displaysleepnow")
-		start_time = time.time()
+		TO_TIME = 1
 		INC_TOTAL = 0
 		TOTAL = 0
 	else:
 		NUM_ITERATIONS = NUM_ITERATIONS + 1
-		start_time = time.time()
+		TO_TIME = 1
 
 
  
