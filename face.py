@@ -61,7 +61,7 @@ ap.add_argument("-p", "--shape-predictor", required=True,
 	help="path to facial landmark predictor")
 ap.add_argument("-v", "--video", type=str, 
 	help="path to input video file")
-ap.add_argument("--min", type=int, default=20, help="minimum time of inactivity")
+ap.add_argument("--min", type=float, default=20, help="minimum time of inactivity")
 args = vars(ap.parse_args())
 
 AVG_EAR = 0
