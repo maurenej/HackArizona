@@ -211,7 +211,7 @@ while True:
 		#cv2.drawContours(frame,[jawHull], -1, (0, 255, 0), 1)
 
 		if CALIBRATING:
-			AVG_EAR = ((AVG_EAR * calibrate_count) + ear) / calibrate_count + 1
+			AVG_EAR = ((AVG_EAR * calibrate_count) + ear) / (calibrate_count + 1)
 			calibrate_count += 1
 			if calibrate_count == 50:
 				CALIBRATING = False
