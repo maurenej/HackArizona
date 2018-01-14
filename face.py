@@ -103,7 +103,7 @@ predictor = dlib.shape_predictor(args["shape_predictor"])
 # right eye, respectively
 (lStart, lEnd) = face_utils.FACIAL_LANDMARKS_IDXS["left_eye"]
 (rStart, rEnd) = face_utils.FACIAL_LANDMARKS_IDXS["right_eye"]
-
+(jStart, jEnd) = face_utils.FACIAL_LANDMARKS_IDXS["jaw"]
 
 # start the video stream thread
 print("[INFO] starting video stream thread...")
@@ -194,6 +194,7 @@ while True:
 		# coordinates to compute the eye aspect ratio for both eyes
 		leftEye = shape[lStart:lEnd]
 		rightEye = shape[rStart:rEnd]
+		jaw = shape[jStart:jEnd]
 		leftEAR = eye_aspect_ratio(leftEye)
 		rightEAR = eye_aspect_ratio(rightEye)
 
@@ -202,10 +203,12 @@ while True:
 
 		# compute the convex hull for the left and right eye, then
 		# visualize each of the eyes
+		jawHull = cv2.convexHull(jaw)
 		leftEyeHull = cv2.convexHull(leftEye)
 		rightEyeHull = cv2.convexHull(rightEye)
 		cv2.drawContours(frame, [leftEyeHull], -1, (0, 255, 0), 1)
 		cv2.drawContours(frame, [rightEyeHull], -1, (0, 255, 0), 1)
+		cv2.drawContours(fram,[jawHull], -1, (0, 255, 0), 1)
 
 
 		if (TO_TIME):
