@@ -38,12 +38,16 @@ def eye_aspect_ratio(eye):
 def check_blink_thresh(inc, tot, elapsed):
 	global start_time
 	global top
+	global INC_TOTAL
+	global TOTAL
 	bpm = tot/ elapsed
 	if bpm < BPM_THRESH and ((inc/tot) > 0.5):
 		# print("WOOOOOO")
 		#pymsgbox.alert(text = "Please look away from screen", button = "Okay")
 		os.system("pmset displaysleepnow")
 		start_time = time.time()
+		INC_TOTAL = 0
+		TOTAL = 0
 	else:
 		start_time = time.time()
 
