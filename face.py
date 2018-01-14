@@ -10,8 +10,8 @@ import time
 import dlib
 import cv2
 import sys
-import Tkinter
-import tkMessageBox
+# import Tkinter
+# import tkMessageBox
 import pymsgbox
 import os
 
