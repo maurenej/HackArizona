@@ -12,7 +12,6 @@ import cv2
 import sys
 import Tkinter
 import tkMessageBox
-from tkinter import messagebox
 import os
 
 def eye_aspect_ratio(eye):
