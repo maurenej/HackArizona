@@ -214,6 +214,7 @@ while True:
 
 		if CALIBRATING:
 			AVG_EAR = (AVG_EAR + ear) / calibrate_count
+			calibrate_count += 1
 			if calibrate_count == 50:
 				CALIBRATING = FALSE
 				EYE_AR_THRESH = 0.75 * AVG_EAR
