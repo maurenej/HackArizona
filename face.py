@@ -10,8 +10,8 @@ import time
 import dlib
 import cv2
 import sys
-# import Tkinter
-# import tkMessageBox
+import tkinter
+from tkinter import messagebox
 import pymsgbox
 import os
 
@@ -46,7 +46,9 @@ def check_blink_thresh(inc, tot, elapsed):
 	bpm = tot/ elapsed
 	if tot == 0 or (bpm < BPM_THRESH and ((inc/tot) > 0.5)) or NUM_ITERATIONS == 3:
 		# print("WOOOOOO")
-		#pymsgbox.alert(text = "Please look away from screen", button = "Okay")
+		root = tkinter.Tk()
+		root.withdraw()
+		messagebox.showinfo("Please take a break and look away from your screen!", "You've been staring at your screen too long, take a break and do some eye exercises :)")
 		os.system("pmset displaysleepnow")
 		TO_TIME = 1
 		INC_TOTAL = 0
@@ -224,7 +226,6 @@ while True:
 			# check to see if the eye aspect ratio is below the blink
 			# threshold, and if so, increment the blink frame counter
 			if ear < EYE_AR_THRESH:
-				print (EYE_AR_THRESH)
 				COUNTER += 1
 			
  
