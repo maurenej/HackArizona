@@ -10,9 +10,9 @@ import time
 import dlib
 import cv2
 import sys
-import tkinter
+import Tkinter
+import tkMessageBox
 from tkinter import messagebox
-import pymsgbox
 import os
 
 def eye_aspect_ratio(eye):
@@ -48,7 +48,7 @@ def check_blink_thresh(inc, tot, elapsed):
 		# print("WOOOOOO")
 		root = tkinter.Tk()
 		root.withdraw()
-		messagebox.showinfo("Please take a break and look away from your screen!", "You've been staring at your screen too long, take a break and do some eye exercises :)")
+		tkMessageBox.showinfo("Hot", "cheeto")
 		os.system("pmset displaysleepnow")
 		TO_TIME = 1
 		INC_TOTAL = 0
