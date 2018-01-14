@@ -40,8 +40,9 @@ def check_blink_thresh(inc, tot, elapsed):
 	global top
 	global INC_TOTAL
 	global TOTAL
+	global NUM_ITERATIONS
 	bpm = tot/ elapsed
-	if bpm < BPM_THRESH and ((inc/tot) > 0.5):
+	if (bpm < BPM_THRESH and ((inc/tot) > 0.5)) or NUM_ITERATIONS == 3:
 		# print("WOOOOOO")
 		#pymsgbox.alert(text = "Please look away from screen", button = "Okay")
 		os.system("pmset displaysleepnow")
@@ -49,6 +50,7 @@ def check_blink_thresh(inc, tot, elapsed):
 		INC_TOTAL = 0
 		TOTAL = 0
 	else:
+		NUM_ITERATIONS = NUM_ITERATIONS + 1
 		start_time = time.time()
 
 
@@ -59,6 +61,7 @@ ap.add_argument("-p", "--shape-predictor", required=True,
 	help="path to facial landmark predictor")
 ap.add_argument("-v", "--video", type=str, 
 	help="path to input video file")
+ap.add_argument("--min", type=int, default=20, help="minimum time of inactivity")
 args = vars(ap.parse_args())
 
 AVG_EAR = 0
@@ -73,6 +76,9 @@ EYE_AR_THRESH = 0.23
 EYE_AR_INC_THRESH = 0.1
 EYE_AR_CONSEC_FRAMES = 3
 BPM_THRESH = 100
+MIN_TIME = args["min"]
+NUM_ITERATIONS = 0
+
  
 # initialize the frame counters and the total number of blinks
 COUNTER = 0
@@ -227,8 +233,7 @@ while True:
 		# The elapsed time is the current time minus the start time (divided by 60 for minutes)
 		elapsed_time = float((time.time() - start_time) / 60.0)	
 
-		if elapsed_time > 0.25:
-			print("REACHED TIME")
+		if elapsed_time > MIN_TIME:
 			#sleep(5)
 			check_blink_thresh(INC_TOTAL, TOTAL, elapsed_time)
 			#start_time = time.time()
