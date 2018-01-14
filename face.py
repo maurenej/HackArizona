@@ -48,6 +48,7 @@ def check_blink_thresh(inc, tot, elapsed):
 		TO_TIME = 1
 		INC_TOTAL = 0
 		TOTAL = 0
+		NUM_ITERATIONS = 0
 	else:
 		NUM_ITERATIONS = NUM_ITERATIONS + 1
 		TO_TIME = 1
