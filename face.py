@@ -28,10 +28,6 @@ def eye_aspect_ratio(eye):
 	# return the eye aspect ratio
 	return ear
 
-# top = Tkinter.Tk()
-
-# def take_break():
-   # tkMessageBox.showinfo("Please take a break from your screen!")
 def check_blink_thresh(inc, tot, elapsed):
 	global start_time
 	global top
@@ -52,8 +48,6 @@ def check_blink_thresh(inc, tot, elapsed):
 	else:
 		NUM_ITERATIONS = NUM_ITERATIONS + 1
 		TO_TIME = 1
-
-
  
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -78,7 +72,6 @@ EYE_AR_CONSEC_FRAMES = 3
 BPM_THRESH = 10
 MIN_TIME = args["min"]
 NUM_ITERATIONS = 1
-
  
 # initialize the frame counters and the total number of blinks
 COUNTER = 0
@@ -86,8 +79,6 @@ INC_COUNTER = 0
 TOTAL = 0
 INC_TOTAL = 0
 TO_TIME = 1
-
-
 
 # initialize dlib's face detector (HOG-based) and then create
 # the facial landmark predictor
@@ -115,56 +106,8 @@ time.sleep(1.0)
 CALIBRATING = True
 calibrate_count = 1
 print("Calibrating...")
-# loop over frames from the video stream
 
-# def calib(hot_cheeto):
-# 	global AVG_EAR
-# 	if hot_cheeto == True:
-# 		for i in range(50):
-# 			# if this is a file video stream, then we need to check if
-# 			# there any more frames left in the buffer to process
-# 			if fileStream and not vs.more():
-# 				break
-
-# 			# grab the frame from the threaded video file stream, resize
-# 			# it, and convert it to grayscale
-# 			# channels)
-# 			frame = vs.read()
-# 			frame = imutils.resize(frame, width=450)
-# 			gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-# 			# detect faces in the grayscale frame
-# 			rects = detector(gray, 0)
-
-# 			# loop over the face detections
-# 			for rect in rects:
-# 				# determine the facial landmarks for the face region, then
-# 				# convert the facial landmark (x, y)-coordinates to a NumPy
-# 				# array
-# 				shape = predictor(gray, rect)
-# 				shape = face_utils.shape_to_np(shape)	
-
-# 				# extract the left and right eye coordinates, then use the
-# 				# coordinates to compute the eye aspect ratio for both eyes
-# 				leftEye = shape[lStart:lEnd]
-# 				rightEye = shape[rStart:rEnd]
-# 				leftEAR = eye_aspect_ratio(leftEye)
-# 				rightEAR = eye_aspect_ratio(rightEye)
-
-# 				# average the eye aspect ratio together for both eyes
-# 				ear = (leftEAR + rightEAR) / 2.0
-# 				AVG_EAR = (AVG_EAR + ear) / (i + 1)
-
-# 				# compute the convex hull for the left and right eye, then
-# 				# visualize each of the eyes
-# 				leftEyeHull = cv2.convexHull(leftEye)
-# 				rightEyeHull = cv2.convexHull(rightEye)
-# 				cv2.drawContours(frame, [leftEyeHull], -1, (0, 255, 0), 1)
-# 				cv2.drawContours(frame, [rightEyeHull], -1, (0, 255, 0), 1)
-# 	CALIBRATING = False
 while True:
-	#calib(CALIBRATING)
-	#EYE_AR_THRESH = AVG_EAR * 0.75
 	# if this is a file video stream, then we need to check if
 	# there any more frames left in the buffer to process
 	if fileStream and not vs.more():
@@ -206,7 +149,6 @@ while True:
 		rightEyeHull = cv2.convexHull(rightEye)
 		cv2.drawContours(frame, [leftEyeHull], -1, (0, 255, 0), 1)
 		cv2.drawContours(frame, [rightEyeHull], -1, (0, 255, 0), 1)
-		#cv2.drawContours(frame,[jawHull], -1, (0, 255, 0), 1)
 
 		if CALIBRATING:
 			AVG_EAR = ((AVG_EAR * calibrate_count) + ear) / (calibrate_count + 1)
@@ -258,10 +200,10 @@ while True:
 
 			# draw the total number of blinks on the frame along with
 			# the computed eye aspect ratio for the frame
-			cv2.putText(frame, "Blinks: {}".format(INC_TOTAL), (10, 30),
-				cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-			cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
-				cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+			# cv2.putText(frame, "Blinks: {}".format(INC_TOTAL), (10, 30),
+			# 	cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+			# cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30),
+			# 	cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
  
 	# show the frame
 	cv2.imshow("Frame", frame)
