@@ -10,8 +10,6 @@ import time
 import dlib
 import cv2
 import sys
-import Tkinter
-import tkMessageBox
 import os
 
 def eye_aspect_ratio(eye):
@@ -44,8 +42,8 @@ def check_blink_thresh(inc, tot, elapsed):
 	print("ITERATION")
 	bpm = tot/ elapsed
 	if tot == 0 or (bpm < BPM_THRESH and ((inc/tot) > 0.5)) or NUM_ITERATIONS == 3:
-		# print("WOOOOOO")
-		tkMessageBox.showinfo("Hot", "cheeto")
+		print("Desktop is going to sleep")
+		time.sleep(2) #delays monitor going off by 2 seconds
 		os.system("pmset displaysleepnow")
 		TO_TIME = 1
 		INC_TOTAL = 0
