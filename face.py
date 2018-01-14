@@ -87,6 +87,7 @@ COUNTER = 0
 INC_COUNTER = 0
 TOTAL = 0
 INC_TOTAL = 0
+TO_TIME = 1
 
 
 
@@ -112,7 +113,7 @@ fileStream = False
 time.sleep(1.0)
 
 
-start_time = time.time()
+#start_time = time.time()
 CALIBRATING = True
 # loop over frames from the video stream
 
@@ -204,6 +205,10 @@ while True:
 		cv2.drawContours(frame, [leftEyeHull], -1, (0, 255, 0), 1)
 		cv2.drawContours(frame, [rightEyeHull], -1, (0, 255, 0), 1)
 
+
+		if (TO_TIME):
+			start_time = time.time()
+			TO_TIME = 0
 		# check to see if the eye aspect ratio is below the blink
 		# threshold, and if so, increment the blink frame counter
 		if ear < EYE_AR_THRESH:
