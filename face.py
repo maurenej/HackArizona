@@ -78,7 +78,7 @@ EYE_AR_INC_THRESH = 0.1
 EYE_AR_CONSEC_FRAMES = 3
 BPM_THRESH = 10
 MIN_TIME = args["min"]
-NUM_ITERATIONS = 0
+NUM_ITERATIONS = 1
 
  
 # initialize the frame counters and the total number of blinks
