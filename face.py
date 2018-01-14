@@ -41,6 +41,7 @@ def check_blink_thresh(inc, tot, elapsed):
 	global INC_TOTAL
 	global TOTAL
 	global NUM_ITERATIONS
+	print("ITERATION")
 	bpm = tot/ elapsed
 	if (bpm < BPM_THRESH and ((inc/tot) > 0.5)) or NUM_ITERATIONS == 3:
 		# print("WOOOOOO")
