@@ -45,8 +45,6 @@ def check_blink_thresh(inc, tot, elapsed):
 	bpm = tot/ elapsed
 	if tot == 0 or (bpm < BPM_THRESH and ((inc/tot) > 0.5)) or NUM_ITERATIONS == 3:
 		# print("WOOOOOO")
-		root = tkinter.Tk()
-		root.withdraw()
 		tkMessageBox.showinfo("Hot", "cheeto")
 		os.system("pmset displaysleepnow")
 		TO_TIME = 1
