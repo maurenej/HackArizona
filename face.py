@@ -208,7 +208,7 @@ while True:
 		rightEyeHull = cv2.convexHull(rightEye)
 		cv2.drawContours(frame, [leftEyeHull], -1, (0, 255, 0), 1)
 		cv2.drawContours(frame, [rightEyeHull], -1, (0, 255, 0), 1)
-		cv2.drawContours(frame,[jawHull], -1, (0, 255, 0), 1)
+		#cv2.drawContours(frame,[jawHull], -1, (0, 255, 0), 1)
 
 
 		if (TO_TIME):
