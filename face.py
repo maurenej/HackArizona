@@ -43,6 +43,7 @@ def check_blink_thresh(inc, tot, elapsed):
 		# print("WOOOOOO")
 		#pymsgbox.alert(text = "Please look away from screen", button = "Okay")
 		os.system("pmset displaysleepnow")
+		start_time = time.time()
 	else:
 		start_time = time.time()
 
